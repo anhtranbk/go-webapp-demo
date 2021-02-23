@@ -2,18 +2,16 @@ package gin
 
 import (
 	"webapp-demo/gin/handlers"
+	"webapp-demo/services"
 
 	"github.com/gin-gonic/gin"
 )
 
 func StartServer() {
-	router := gin.Default()
+	app := gin.Default()
 
-	v1 := router.Group("/v1")
+	// register routes
+	InitAuthRoutes(app, &handlers.AuthHandler{Service: services.NewMockAuthService()})
 
-	auth := v1.Group("/auth")
-	auth.POST("/registration", handlers.UserRegistration)
-	auth.POST("/login", handlers.UserLogin)
-
-	router.Run(":8080")
+	app.Run(":8080")
 }

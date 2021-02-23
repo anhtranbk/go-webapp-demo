@@ -8,34 +8,42 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func UserRegistration(c *gin.Context) {
-	var userReg dtos.UserRegistrationDto
-	if err := c.ShouldBindJSON(&userReg); err != nil {
-		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
-		return
-	}
-
-	resp, err := services.UserRegistration(userReg)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, &resp)
+type AuthHandler struct {
+	Service services.AuthService
 }
 
-func UserLogin(c *gin.Context) {
-	var userLogin dtos.UserLoginDto
-	if err := c.ShouldBindJSON(&userLogin); err != nil {
-		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
+func NewAuthHandler() *AuthHandler {
+	return &AuthHandler{}
+}
+
+func (h AuthHandler) UserRegistration(ctx *gin.Context) {
+	var userReg dtos.UserRegistrationDto
+	if err := ctx.ShouldBindJSON(&userReg); err != nil {
+		ctx.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
 		return
 	}
 
-	resp, err := services.UserLogin(userLogin)
+	resp, err := h.Service.UserRegistration(userReg)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
+		ctx.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, &resp)
+	ctx.JSON(http.StatusOK, &resp)
+}
+
+func (h AuthHandler) UserLogin(ctx *gin.Context) {
+	var userLogin dtos.UserLoginDto
+	if err := ctx.ShouldBindJSON(&userLogin); err != nil {
+		ctx.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
+		return
+	}
+
+	resp, err := h.Service.UserLogin(userLogin)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, &resp)
 }
