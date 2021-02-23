@@ -5,7 +5,14 @@ import (
 	"webapp-demo/dtos"
 )
 
-func UserRegistration(userReg dtos.UserRegistrationDto) (dtos.UserDto, error) {
+type MockAuthService struct {
+}
+
+func NewMockAuthService() *MockAuthService {
+	return &MockAuthService{}
+}
+
+func (s *MockAuthService) UserRegistration(userReg dtos.UserRegistrationDto) (dtos.UserDto, error) {
 	return dtos.UserDto{
 		UserId:    184615,
 		UserName:  "tjeubaoit",
@@ -17,7 +24,7 @@ func UserRegistration(userReg dtos.UserRegistrationDto) (dtos.UserDto, error) {
 	}, nil
 }
 
-func UserLogin(userLogin dtos.UserLoginDto) (dtos.UserTokenDto, error) {
+func (s *MockAuthService) UserLogin(userLogin dtos.UserLoginDto) (dtos.UserTokenDto, error) {
 	return dtos.UserTokenDto{
 		AccessToken:  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODUwNjMyMTYsIm5iZiI6MTU4NTA2MzIxNiwianRpIj",
 		TokenType:    "Bearer",
