@@ -8,14 +8,18 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func UserRegistration(c *fiber.Ctx) error {
+type AuthHandler struct {
+	Service services.AuthService
+}
+
+func (h AuthHandler) UserRegistration(c *fiber.Ctx) error {
 	var userReg dtos.UserRegistrationDto
 	if err := c.BodyParser(&userReg); err != nil {
 		c.Status(http.StatusBadRequest).JSON(dtos.E{Error: err.Error()})
 		return err
 	}
 
-	resp, err := services.UserRegistration(userReg)
+	resp, err := h.Service.UserRegistration(userReg)
 	if err != nil {
 		c.Status(http.StatusInternalServerError).JSON(dtos.E{Error: err.Error()})
 		return err
@@ -25,14 +29,14 @@ func UserRegistration(c *fiber.Ctx) error {
 	return nil
 }
 
-func UserLogin(c *fiber.Ctx) error {
+func (h AuthHandler) UserLogin(c *fiber.Ctx) error {
 	var userLogin dtos.UserLoginDto
 	if err := c.BodyParser(&userLogin); err != nil {
 		c.Status(http.StatusBadRequest).JSON(dtos.E{Error: err.Error()})
 		return err
 	}
 
-	resp, err := services.UserLogin(userLogin)
+	resp, err := h.Service.UserLogin(userLogin)
 	if err != nil {
 		c.Status(http.StatusInternalServerError).JSON(dtos.E{Error: err.Error()})
 		return err
