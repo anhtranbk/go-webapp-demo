@@ -8,14 +8,18 @@ import (
 	echo "github.com/labstack/echo/v4"
 )
 
-func UserRegistration(c echo.Context) error {
+type AuthHandler struct {
+	Service services.AuthService
+}
+
+func (h AuthHandler) UserRegistration(c echo.Context) error {
 	var userReg dtos.UserRegistrationDto
 	if err := c.Bind(&userReg); err != nil {
 		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
 		return err
 	}
 
-	resp, err := services.UserRegistration(userReg)
+	resp, err := h.Service.UserRegistration(userReg)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
 		return err
@@ -25,14 +29,14 @@ func UserRegistration(c echo.Context) error {
 	return nil
 }
 
-func UserLogin(c echo.Context) error {
+func (h AuthHandler) UserLogin(c echo.Context) error {
 	var userLogin dtos.UserLoginDto
 	if err := c.Bind(&userLogin); err != nil {
 		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
 		return err
 	}
 
-	resp, err := services.UserLogin(userLogin)
+	resp, err := h.Service.UserLogin(userLogin)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
 		return err
