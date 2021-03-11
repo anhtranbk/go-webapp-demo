@@ -3,13 +3,13 @@ package handlers
 import (
 	"net/http"
 	"webapp-demo/dtos"
-	"webapp-demo/services"
+	"webapp-demo/service"
 
 	"github.com/gin-gonic/gin"
 )
 
 type AuthHandler struct {
-	Service services.AuthService
+	Service service.AuthService
 }
 
 func NewAuthHandler() *AuthHandler {

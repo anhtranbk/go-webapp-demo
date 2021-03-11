@@ -3,13 +3,13 @@ package handlers
 import (
 	"net/http"
 	"webapp-demo/dtos"
-	"webapp-demo/services"
+	"webapp-demo/service"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 type AuthHandler struct {
-	Service services.AuthService
+	Service service.AuthService
 }
 
 func (h AuthHandler) UserRegistration(c *fiber.Ctx) error {

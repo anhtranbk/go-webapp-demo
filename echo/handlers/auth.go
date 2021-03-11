@@ -3,13 +3,13 @@ package handlers
 import (
 	"net/http"
 	"webapp-demo/dtos"
-	"webapp-demo/services"
+	"webapp-demo/service"
 
 	echo "github.com/labstack/echo/v4"
 )
 
 type AuthHandler struct {
-	Service services.AuthService
+	Service service.AuthService
 }
 
 func (h AuthHandler) UserRegistration(c echo.Context) error {
