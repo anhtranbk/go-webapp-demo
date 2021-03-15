@@ -16,7 +16,8 @@ func StartServer() {
 	app.Use(middleware.Recover())
 
 	// register routes
-	InitAuthRoutes(app, &handler.AuthHandler{Service: service.NewMockAuthService()})
+	v1 := app.Group("/v1")
+	InitAuthRoutes(v1, &handler.AuthHandler{Service: service.NewMockAuthService()})
 
 	app.Logger.Fatal(app.Start(":8080"))
 }

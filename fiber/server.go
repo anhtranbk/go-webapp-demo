@@ -12,7 +12,8 @@ func StartServer() {
 	app := fiber.New()
 
 	// init routes
-	InitAuthRoutes(app, &handler.AuthHandler{Service: service.NewMockAuthService()})
+	v1 := app.Group("/v1")
+	InitAuthRoutes(v1, &handler.AuthHandler{Service: service.NewMockAuthService()})
 
 	log.Fatal(app.Listen(":8080"))
 }

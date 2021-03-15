@@ -11,7 +11,8 @@ func StartServer() {
 	app := gin.Default()
 
 	// register routes
-	InitAuthRoutes(app, &handler.AuthHandler{Service: service.NewMockAuthService()})
+	v1 := app.Group("/v1")
+	InitAuthRoutes(v1, &handler.AuthHandler{Service: service.NewMockAuthService()})
 
 	app.Run(":8080")
 }

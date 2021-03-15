@@ -6,10 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func InitAuthRoutes(app *gin.Engine, authHandler *handler.AuthHandler) {
-	v1 := app.Group("/v1")
-
-	auth := v1.Group("/auth")
+func InitAuthRoutes(router *gin.RouterGroup, authHandler *handler.AuthHandler) {
+	auth := router.Group("/auth")
 	auth.POST("/registration", authHandler.UserRegistration)
 	auth.POST("/login", authHandler.UserLogin)
 }
