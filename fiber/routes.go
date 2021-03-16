@@ -8,6 +8,6 @@ import (
 
 func InitAuthRoutes(router fiber.Router, authHandler *handler.AuthHandler) {
 	auth := router.Group("/auth")
-	auth.Post("/registration", authHandler.UserRegistration)
-	auth.Post("/login", authHandler.UserLogin)
+	auth.Post("/signup", authHandler.SignUp)
+	auth.Post("/signin", authHandler.SignIn)
 }

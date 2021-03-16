@@ -16,7 +16,7 @@ func NewAuthHandler() *AuthHandler {
 	return &AuthHandler{}
 }
 
-func (h AuthHandler) UserRegistration(ctx *gin.Context) {
+func (h AuthHandler) SignUp(ctx *gin.Context) {
 	var userReg dtos.UserRegistrationDto
 	if err := ctx.ShouldBindJSON(&userReg); err != nil {
 		ctx.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
@@ -32,7 +32,7 @@ func (h AuthHandler) UserRegistration(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, &resp)
 }
 
-func (h AuthHandler) UserLogin(ctx *gin.Context) {
+func (h AuthHandler) SignIn(ctx *gin.Context) {
 	var userLogin dtos.UserLoginDto
 	if err := ctx.ShouldBindJSON(&userLogin); err != nil {
 		ctx.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})

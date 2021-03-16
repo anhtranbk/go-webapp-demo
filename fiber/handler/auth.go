@@ -12,7 +12,7 @@ type AuthHandler struct {
 	Service service.AuthService
 }
 
-func (h AuthHandler) UserRegistration(c *fiber.Ctx) error {
+func (h AuthHandler) SignUp(c *fiber.Ctx) error {
 	var userReg dtos.UserRegistrationDto
 	if err := c.BodyParser(&userReg); err != nil {
 		c.Status(http.StatusBadRequest).JSON(dtos.E{Error: err.Error()})
@@ -29,7 +29,7 @@ func (h AuthHandler) UserRegistration(c *fiber.Ctx) error {
 	return nil
 }
 
-func (h AuthHandler) UserLogin(c *fiber.Ctx) error {
+func (h AuthHandler) SignIn(c *fiber.Ctx) error {
 	var userLogin dtos.UserLoginDto
 	if err := c.BodyParser(&userLogin); err != nil {
 		c.Status(http.StatusBadRequest).JSON(dtos.E{Error: err.Error()})

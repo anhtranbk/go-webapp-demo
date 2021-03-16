@@ -12,7 +12,7 @@ type AuthHandler struct {
 	Service service.AuthService
 }
 
-func (h AuthHandler) UserRegistration(c echo.Context) error {
+func (h AuthHandler) SignUp(c echo.Context) error {
 	var userReg dtos.UserRegistrationDto
 	if err := c.Bind(&userReg); err != nil {
 		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
@@ -29,7 +29,7 @@ func (h AuthHandler) UserRegistration(c echo.Context) error {
 	return nil
 }
 
-func (h AuthHandler) UserLogin(c echo.Context) error {
+func (h AuthHandler) SignIn(c echo.Context) error {
 	var userLogin dtos.UserLoginDto
 	if err := c.Bind(&userLogin); err != nil {
 		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
