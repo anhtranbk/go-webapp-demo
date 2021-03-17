@@ -13,7 +13,7 @@ type AuthHandler struct {
 }
 
 func (h AuthHandler) SignUp(c *fiber.Ctx) error {
-	var userReg dtos.UserRegistrationDto
+	var userReg dtos.SignUpDto
 	if err := c.BodyParser(&userReg); err != nil {
 		c.Status(http.StatusBadRequest).JSON(dtos.E{Error: err.Error()})
 		return err
@@ -30,7 +30,7 @@ func (h AuthHandler) SignUp(c *fiber.Ctx) error {
 }
 
 func (h AuthHandler) SignIn(c *fiber.Ctx) error {
-	var userLogin dtos.UserLoginDto
+	var userLogin dtos.SignInDto
 	if err := c.BodyParser(&userLogin); err != nil {
 		c.Status(http.StatusBadRequest).JSON(dtos.E{Error: err.Error()})
 		return err

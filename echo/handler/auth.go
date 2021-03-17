@@ -13,7 +13,7 @@ type AuthHandler struct {
 }
 
 func (h AuthHandler) SignUp(c echo.Context) error {
-	var userReg dtos.UserRegistrationDto
+	var userReg dtos.SignUpDto
 	if err := c.Bind(&userReg); err != nil {
 		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
 		return err
@@ -30,7 +30,7 @@ func (h AuthHandler) SignUp(c echo.Context) error {
 }
 
 func (h AuthHandler) SignIn(c echo.Context) error {
-	var userLogin dtos.UserLoginDto
+	var userLogin dtos.SignInDto
 	if err := c.Bind(&userLogin); err != nil {
 		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
 		return err

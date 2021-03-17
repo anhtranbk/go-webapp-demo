@@ -5,6 +5,6 @@ import (
 )
 
 type AuthService interface {
-	UserRegistration(userReg dtos.UserRegistrationDto) (dtos.UserDto, error)
-	UserLogin(userLogin dtos.UserLoginDto) (dtos.UserTokenDto, error)
+	UserRegistration(userReg dtos.SignUpDto) (dtos.UserDto, error)
+	UserLogin(userLogin dtos.SignInDto) (dtos.AccessTokenDto, error)
 }

@@ -2,17 +2,17 @@ package dtos
 
 import "time"
 
-type UserRegistrationDto struct {
+type SignUpDto struct {
 	UserName string `json:"username"`
 	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
-type UserLoginDto struct {
-	UserRegistrationDto
+type SignInDto struct {
+	SignUpDto
 }
 
-type UserTokenDto struct {
+type AccessTokenDto struct {
 	AccessToken  string    `json:"access_token"`
 	TokenType    string    `json:"token_type"`
 	ExpiredAt    time.Time `json:"expired_at"`
