@@ -17,13 +17,13 @@ func NewAuthHandler() *AuthHandler {
 }
 
 func (h AuthHandler) SignUp(ctx *gin.Context) {
-	var userReg dtos.SignUpDto
-	if err := ctx.ShouldBindJSON(&userReg); err != nil {
+	var signUp dtos.SignUpDto
+	if err := ctx.ShouldBindJSON(&signUp); err != nil {
 		ctx.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
 		return
 	}
 
-	resp, err := h.Service.UserRegistration(userReg)
+	resp, err := h.Service.UserRegistration(signUp)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
 		return
@@ -33,13 +33,13 @@ func (h AuthHandler) SignUp(ctx *gin.Context) {
 }
 
 func (h AuthHandler) SignIn(ctx *gin.Context) {
-	var userLogin dtos.SignInDto
-	if err := ctx.ShouldBindJSON(&userLogin); err != nil {
+	var signIn dtos.SignInDto
+	if err := ctx.ShouldBindJSON(&signIn); err != nil {
 		ctx.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
 		return
 	}
 
-	resp, err := h.Service.UserLogin(userLogin)
+	resp, err := h.Service.UserLogin(signIn)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
 		return

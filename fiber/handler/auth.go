@@ -13,13 +13,13 @@ type AuthHandler struct {
 }
 
 func (h AuthHandler) SignUp(c *fiber.Ctx) error {
-	var userReg dtos.SignUpDto
-	if err := c.BodyParser(&userReg); err != nil {
+	var signUp dtos.SignUpDto
+	if err := c.BodyParser(&signUp); err != nil {
 		c.Status(http.StatusBadRequest).JSON(dtos.E{Error: err.Error()})
 		return err
 	}
 
-	resp, err := h.Service.UserRegistration(userReg)
+	resp, err := h.Service.UserRegistration(signUp)
 	if err != nil {
 		c.Status(http.StatusInternalServerError).JSON(dtos.E{Error: err.Error()})
 		return err
@@ -30,13 +30,13 @@ func (h AuthHandler) SignUp(c *fiber.Ctx) error {
 }
 
 func (h AuthHandler) SignIn(c *fiber.Ctx) error {
-	var userLogin dtos.SignInDto
-	if err := c.BodyParser(&userLogin); err != nil {
+	var signIn dtos.SignInDto
+	if err := c.BodyParser(&signIn); err != nil {
 		c.Status(http.StatusBadRequest).JSON(dtos.E{Error: err.Error()})
 		return err
 	}
 
-	resp, err := h.Service.UserLogin(userLogin)
+	resp, err := h.Service.UserLogin(signIn)
 	if err != nil {
 		c.Status(http.StatusInternalServerError).JSON(dtos.E{Error: err.Error()})
 		return err

@@ -13,13 +13,13 @@ type AuthHandler struct {
 }
 
 func (h AuthHandler) SignUp(c echo.Context) error {
-	var userReg dtos.SignUpDto
-	if err := c.Bind(&userReg); err != nil {
+	var signUp dtos.SignUpDto
+	if err := c.Bind(&signUp); err != nil {
 		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
 		return err
 	}
 
-	resp, err := h.Service.UserRegistration(userReg)
+	resp, err := h.Service.UserRegistration(signUp)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
 		return err
@@ -30,13 +30,13 @@ func (h AuthHandler) SignUp(c echo.Context) error {
 }
 
 func (h AuthHandler) SignIn(c echo.Context) error {
-	var userLogin dtos.SignInDto
-	if err := c.Bind(&userLogin); err != nil {
+	var signIn dtos.SignInDto
+	if err := c.Bind(&signIn); err != nil {
 		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
 		return err
 	}
 
-	resp, err := h.Service.UserLogin(userLogin)
+	resp, err := h.Service.UserLogin(signIn)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
 		return err
