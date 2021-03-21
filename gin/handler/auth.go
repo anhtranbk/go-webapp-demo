@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"webapp-demo/core"
 	"webapp-demo/dtos"
 	"webapp-demo/service"
 
@@ -12,8 +13,10 @@ type AuthHandler struct {
 	Service service.AuthService
 }
 
-func NewAuthHandler() *AuthHandler {
-	return &AuthHandler{}
+func NewAuthHandler(ctx *core.AppContext) *AuthHandler {
+	return &AuthHandler{
+		Service: service.NewMockAuthService(),
+	}
 }
 
 func (h AuthHandler) SignUp(ctx *gin.Context) {
@@ -23,13 +26,13 @@ func (h AuthHandler) SignUp(ctx *gin.Context) {
 		return
 	}
 
-	resp, err := h.Service.UserRegistration(signUp)
+	resp, err := h.Service.UserSignUp(signUp)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
 		return
 	}
 
-	ctx.JSON(http.StatusOK, &resp)
+	ctx.JSON(http.StatusOK, resp)
 }
 
 func (h AuthHandler) SignIn(ctx *gin.Context) {
@@ -39,11 +42,11 @@ func (h AuthHandler) SignIn(ctx *gin.Context) {
 		return
 	}
 
-	resp, err := h.Service.UserLogin(signIn)
+	resp, err := h.Service.UserSignIn(signIn)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
 		return
 	}
 
-	ctx.JSON(http.StatusOK, &resp)
+	ctx.JSON(http.StatusOK, resp)
 }
