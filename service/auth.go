@@ -21,7 +21,7 @@ func NewDefaultAuthService(ctx *context.Context, repo repository.Repositories) *
 	}
 }
 
-func (s *DefaultAuthService) UserRegistration(signUp dtos.SignUpDto) (*dtos.UserDto, error) {
+func (s *DefaultAuthService) UserSignUp(signUp dtos.SignUpDto) (*dtos.UserDto, error) {
 	repo := s.repo.UserRepo
 	exist, err := repo.IsExist(signUp.Email)
 	if err != nil {
@@ -51,7 +51,7 @@ func (s *DefaultAuthService) UserRegistration(signUp dtos.SignUpDto) (*dtos.User
 	}, nil
 }
 
-func (s *DefaultAuthService) UserLogin(signIn dtos.SignInDto) (*dtos.AccessTokenDto, error) {
+func (s *DefaultAuthService) UserSignIn(signIn dtos.SignInDto) (*dtos.AccessTokenDto, error) {
 	authRepo := s.repo.UserRepo
 	refreshTokenRepo := s.repo.RefreshTokenRepo
 

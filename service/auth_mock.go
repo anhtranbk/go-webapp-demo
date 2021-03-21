@@ -13,7 +13,7 @@ func NewMockAuthService() *MockAuthService {
 	return &MockAuthService{}
 }
 
-func (s *MockAuthService) UserRegistration(userReg dtos.SignUpDto) (*dtos.UserDto, error) {
+func (s *MockAuthService) UserSignUp(userReg dtos.SignUpDto) (*dtos.UserDto, error) {
 	return &dtos.UserDto{
 		UserId:    184615,
 		UserName:  "tjeubaoit",
@@ -25,7 +25,7 @@ func (s *MockAuthService) UserRegistration(userReg dtos.SignUpDto) (*dtos.UserDt
 	}, nil
 }
 
-func (s *MockAuthService) UserLogin(userLogin dtos.SignInDto) (*dtos.AccessTokenDto, error) {
+func (s *MockAuthService) UserSignIn(userLogin dtos.SignInDto) (*dtos.AccessTokenDto, error) {
 	return &dtos.AccessTokenDto{
 		AccessToken:  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODUwNjMyMTYsIm5iZiI6MTU4NTA2MzIxNiwianRpIj",
 		TokenType:    "Bearer",
