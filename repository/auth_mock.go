@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"errors"
+	"fmt"
 	"math/rand"
 	"webapp-demo/entity"
 )
@@ -18,6 +19,9 @@ func NewMockUserRepository() *MockUserRepository {
 
 func (r *MockUserRepository) Create(user *entity.User) (*entity.User, error) {
 	user.UserId = entity.EntityId(rand.Int31n(999999))
+	if user.UserName == "" {
+		user.UserName = fmt.Sprintf("user_%d", user.UserId)
+	}
 	r.users[user.UserId] = user
 	return user, nil
 }
