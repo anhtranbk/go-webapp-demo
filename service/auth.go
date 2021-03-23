@@ -41,7 +41,7 @@ func (s *DefaultAuthService) UserSignUp(signUp dtos.SignUpDto) (*dtos.UserDto, e
 	}
 
 	return &dtos.UserDto{
-		UserId:    uint64(user.UserId),
+		UserId:    user.UserId,
 		UserName:  user.UserName,
 		Email:     user.Email,
 		Dob:       user.Dob,
