@@ -9,7 +9,8 @@ type SignUpDto struct {
 }
 
 type SignInDto struct {
-	SignUpDto
+	Email    string `json:"email" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }
 
 type AccessTokenDto struct {
