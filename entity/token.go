@@ -3,8 +3,9 @@ package entity
 import "time"
 
 type RefreshToken struct {
-	UserId    EntityId
+	TokenId   EntityId
 	Token     string
 	ExpiredAt time.Time
 	IsActive  bool
+	UserId    EntityId
 }

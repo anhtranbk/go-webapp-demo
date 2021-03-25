@@ -17,9 +17,9 @@ type UserRepository interface {
 }
 
 type RefreshTokenRepository interface {
-	Create(token string, expiredAt time.Time) (*entity.RefreshToken, error)
-	Update(token *entity.RefreshToken) error
-	DeactivateByUserId(userid entity.EntityId) error
+	Create(token string, expiredAt time.Time, userId entity.EntityId) (*entity.RefreshToken, error)
+	Update(token string, expiredAt time.Time, userId entity.EntityId) (*entity.RefreshToken, error)
+	DeactivateByUserId(userId entity.EntityId) error
 }
 
 type Repositories struct {

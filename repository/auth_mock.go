@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"context"
 	"errors"
 	"fmt"
 	"math/rand"
@@ -9,7 +8,6 @@ import (
 )
 
 type MockUserRepository struct {
-	ctx   *context.Context
 	users map[entity.EntityId]*entity.User
 }
 
