@@ -63,7 +63,8 @@ func (s *DefaultAuthService) UserSignIn(signIn dtos.SignInDto) (*dtos.AccessToke
 		return nil, errorx.InvalidCredentials
 	}
 
-	refreshToken, err := refreshTokenRepo.Create("7c271bec2288b77c", time.Now().Add(30*24*time.Hour))
+	expiredAt := time.Now().Add(15 * 24 * time.Hour)
+	refreshToken, err := refreshTokenRepo.Create("7c271bec2288b77c", expiredAt, user.UserId)
 	if err != nil {
 		return nil, err
 	}
