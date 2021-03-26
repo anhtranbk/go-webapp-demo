@@ -4,7 +4,6 @@ import (
 	"context"
 	"webapp-demo/config"
 	"webapp-demo/core"
-	"webapp-demo/gin/handler"
 	"webapp-demo/repository"
 
 	"github.com/gin-gonic/gin"
@@ -19,10 +18,7 @@ func StartServer() {
 		Repo:    repository.NewMockRepositories(),
 	}
 
-	// register routes
-	v1 := app.Group("/v1")
-	// InitAuthRoutes(v1, &handler.AuthHandler{Service: service.NewMockAuthService()})
-	InitAuthRoutes(v1, handler.NewAuthHandler(appCtx))
+	InitRoutes(app, appCtx)
 
 	app.Run(":8080")
 }
