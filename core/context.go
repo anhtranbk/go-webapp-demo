@@ -1,11 +1,13 @@
 package core
 
 import (
+	"context"
 	"webapp-demo/config"
 	"webapp-demo/repository"
 )
 
 type AppContext struct {
-	Config *config.Config
-	Repo   *repository.Repositories
+	Context context.Context
+	Config  *config.Config
+	Repo    *repository.Repositories
 }
