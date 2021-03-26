@@ -10,12 +10,14 @@ import (
 )
 
 type AuthHandler struct {
-	Service service.AuthService
+	AppContext *core.AppContext
+	Service    service.AuthService
 }
 
 func NewAuthHandler(ctx *core.AppContext) *AuthHandler {
 	return &AuthHandler{
-		Service: service.NewMockAuthService(),
+		Service:    service.NewDefaultAuthService(&ctx.Context, *ctx.Repo),
+		AppContext: ctx,
 	}
 }
 
