@@ -16,7 +16,7 @@ func StartServer() {
 	appCtx := &core.AppContext{
 		Context: context.TODO(),
 		Config:  &config.Config{},
-		Repo:    repository.NewRepositories(),
+		Repo:    repository.NewMockRepositories(),
 	}
 
 	// register routes

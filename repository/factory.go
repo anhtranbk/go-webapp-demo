@@ -1,6 +1,6 @@
 package repository
 
-func NewRepositories() *Repositories {
+func NewMockRepositories() *Repositories {
 	return &Repositories{
 		UserRepo:         NewMockUserRepository(),
 		RefreshTokenRepo: NewMockRefreshTokenRepository(),
