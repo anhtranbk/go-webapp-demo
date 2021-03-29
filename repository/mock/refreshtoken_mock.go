@@ -38,7 +38,7 @@ func (r *MockRefreshTokenRepository) Update(token string, expiredAt time.Time,
 	return tokenObj, nil
 }
 
-func (r *MockRefreshTokenRepository) DeactivateByUserId(userId entity.EntityId) error {
+func (r *MockRefreshTokenRepository) Deactivate(userId entity.EntityId) error {
 	r.tokens[userId].IsActive = false
 	return nil
 }
