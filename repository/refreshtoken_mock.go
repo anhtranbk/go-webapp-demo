@@ -11,7 +11,9 @@ type MockRefreshTokenRepository struct {
 }
 
 func NewMockRefreshTokenRepository() *MockRefreshTokenRepository {
-	return &MockRefreshTokenRepository{}
+	return &MockRefreshTokenRepository{
+		tokens: map[entity.EntityId]*entity.RefreshToken{},
+	}
 }
 
 func (r *MockRefreshTokenRepository) Create(token string, expiredAt time.Time,

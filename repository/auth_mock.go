@@ -12,7 +12,9 @@ type MockUserRepository struct {
 }
 
 func NewMockUserRepository() *MockUserRepository {
-	return &MockUserRepository{}
+	return &MockUserRepository{
+		users: make(map[entity.EntityId]*entity.User),
+	}
 }
 
 func (r *MockUserRepository) Create(user *entity.User) (*entity.User, error) {
