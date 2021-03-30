@@ -14,7 +14,7 @@ type DefaultAuthService struct {
 	repo    repository.Repositories
 }
 
-func NewDefaultAuthService(ctx *context.Context, repo repository.Repositories) *DefaultAuthService {
+func NewAuthService(ctx *context.Context, repo repository.Repositories) *DefaultAuthService {
 	return &DefaultAuthService{
 		context: ctx,
 		repo:    repo,
