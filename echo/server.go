@@ -1,23 +1,30 @@
 package echo
 
 import (
-	"webapp-demo/echo/handler"
-	"webapp-demo/service"
+	"context"
+	"webapp-demo/config"
+	"webapp-demo/core"
+	"webapp-demo/repository"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
 func StartServer() {
-	app := echo.New()
+	e := echo.New()
 
 	// Middleware
-	app.Use(middleware.Logger())
-	app.Use(middleware.Recover())
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
-	// register routes
-	v1 := app.Group("/v1")
-	InitAuthRoutes(v1, &handler.AuthHandler{Service: service.NewMockAuthService()})
+	appCtx := core.AppContext{
+		Context: context.TODO(),
+		Config:  &config.Config{},
+		Repo:    repository.NewMockRepositories(),
+	}
 
-	app.Logger.Fatal(app.Start(":8080"))
+	InitRoutes(e, &appCtx)
+
+	e.Logger.Fatal(e.Start(":8080"))
+
 }
