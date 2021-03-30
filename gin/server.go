@@ -12,13 +12,13 @@ import (
 func StartServer() {
 	app := gin.Default()
 
-	appCtx := &core.AppContext{
+	appCtx := core.AppContext{
 		Context: context.TODO(),
 		Config:  &config.Config{},
 		Repo:    repository.NewMockRepositories(),
 	}
 
-	InitRoutes(app, appCtx)
+	InitRoutes(app, &appCtx)
 
 	app.Run(":8080")
 }

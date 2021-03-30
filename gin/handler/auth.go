@@ -14,10 +14,10 @@ type AuthHandler struct {
 	Service    service.AuthService
 }
 
-func NewAuthHandler(ctx *core.AppContext) *AuthHandler {
+func NewAuthHandler(appCtx *core.AppContext) *AuthHandler {
 	return &AuthHandler{
-		AppContext: ctx,
-		Service:    service.NewAuthService(&ctx.Context, *ctx.Repo),
+		AppContext: appCtx,
+		Service:    service.NewAuthService(&appCtx.Context, *appCtx.Repo),
 	}
 }
 
