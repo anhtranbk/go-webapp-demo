@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"webapp-demo/core"
 	"webapp-demo/dtos"
 	"webapp-demo/service"
 
@@ -9,7 +10,15 @@ import (
 )
 
 type AuthHandler struct {
-	Service service.AuthService
+	AppContext *core.AppContext
+	Service    service.AuthService
+}
+
+func NewAuthHandler(appCtx *core.AppContext) *AuthHandler {
+	return &AuthHandler{
+		AppContext: appCtx,
+		Service:    service.NewAuthService(&appCtx.Context, *appCtx.Repo),
+	}
 }
 
 func (h AuthHandler) SignUp(c *fiber.Ctx) error {
@@ -19,7 +28,7 @@ func (h AuthHandler) SignUp(c *fiber.Ctx) error {
 		return err
 	}
 
-	resp, err := h.Service.UserRegistration(signUp)
+	resp, err := h.Service.UserSignUp(signUp)
 	if err != nil {
 		c.Status(http.StatusInternalServerError).JSON(dtos.E{Error: err.Error()})
 		return err
@@ -36,7 +45,7 @@ func (h AuthHandler) SignIn(c *fiber.Ctx) error {
 		return err
 	}
 
-	resp, err := h.Service.UserLogin(signIn)
+	resp, err := h.Service.UserSignIn(signIn)
 	if err != nil {
 		c.Status(http.StatusInternalServerError).JSON(dtos.E{Error: err.Error()})
 		return err
