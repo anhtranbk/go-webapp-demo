@@ -3,6 +3,8 @@ package service
 import (
 	"context"
 	"time"
+	"webapp-demo/config"
+	"webapp-demo/core"
 	"webapp-demo/dtos"
 	"webapp-demo/entity"
 	"webapp-demo/pkg/errorx"
@@ -10,14 +12,16 @@ import (
 )
 
 type DefaultAuthService struct {
-	context *context.Context
+	config  *config.Config
+	context context.Context
 	repo    repository.Repositories
 }
 
-func NewAuthService(ctx *context.Context, repo repository.Repositories) *DefaultAuthService {
+func NewAuthService(appCtx *core.AppContext) *DefaultAuthService {
 	return &DefaultAuthService{
-		context: ctx,
-		repo:    repo,
+		config:  appCtx.Config,
+		context: appCtx.Context,
+		repo:    *appCtx.Repo,
 	}
 }
 

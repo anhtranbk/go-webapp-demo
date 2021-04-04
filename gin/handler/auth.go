@@ -17,7 +17,7 @@ type AuthHandler struct {
 func NewAuthHandler(appCtx *core.AppContext) *AuthHandler {
 	return &AuthHandler{
 		AppContext: appCtx,
-		Service:    service.NewAuthService(&appCtx.Context, *appCtx.Repo),
+		Service:    service.NewAuthService(appCtx),
 	}
 }
 
