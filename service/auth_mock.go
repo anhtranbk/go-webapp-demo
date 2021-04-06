@@ -2,7 +2,7 @@ package service
 
 import (
 	"time"
-	"webapp-demo/dtos"
+	"webapp-demo/dto"
 	"webapp-demo/entity"
 )
 
@@ -13,8 +13,8 @@ func NewMockAuthService() *MockAuthService {
 	return &MockAuthService{}
 }
 
-func (s *MockAuthService) UserSignUp(userReg dtos.SignUpDto) (*dtos.UserDto, error) {
-	return &dtos.UserDto{
+func (s *MockAuthService) UserSignUp(userReg dto.SignUpDto) (*dto.UserDto, error) {
+	return &dto.UserDto{
 		UserId:    184615,
 		UserName:  "tjeubaoit",
 		Email:     "sieunhancamlon@gmail.com",
@@ -25,8 +25,8 @@ func (s *MockAuthService) UserSignUp(userReg dtos.SignUpDto) (*dtos.UserDto, err
 	}, nil
 }
 
-func (s *MockAuthService) UserSignIn(userLogin dtos.SignInDto) (*dtos.AccessTokenDto, error) {
-	return &dtos.AccessTokenDto{
+func (s *MockAuthService) UserSignIn(userLogin dto.SignInDto) (*dto.AccessTokenDto, error) {
+	return &dto.AccessTokenDto{
 		AccessToken:  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODUwNjMyMTYsIm5iZiI6MTU4NTA2MzIxNiwianRpIj",
 		TokenType:    "Bearer",
 		ExpiredAt:    time.Now().Add(time.Minute * 60),

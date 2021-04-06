@@ -5,7 +5,7 @@ import (
 	"time"
 	"webapp-demo/config"
 	"webapp-demo/core"
-	"webapp-demo/dtos"
+	"webapp-demo/dto"
 	"webapp-demo/entity"
 	"webapp-demo/pkg/errorx"
 	"webapp-demo/repository"
@@ -25,7 +25,7 @@ func NewAuthService(appCtx *core.AppContext) *DefaultAuthService {
 	}
 }
 
-func (s *DefaultAuthService) UserSignUp(signUp dtos.SignUpDto) (*dtos.UserDto, error) {
+func (s *DefaultAuthService) UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, error) {
 	repo := s.repo.UserRepo
 	exist, err := repo.IsExist(signUp.Email)
 	if err != nil {
@@ -44,7 +44,7 @@ func (s *DefaultAuthService) UserSignUp(signUp dtos.SignUpDto) (*dtos.UserDto, e
 		return nil, err
 	}
 
-	return &dtos.UserDto{
+	return &dto..UserDto{
 		UserId:    user.UserId,
 		UserName:  user.UserName,
 		Email:     user.Email,
@@ -55,7 +55,7 @@ func (s *DefaultAuthService) UserSignUp(signUp dtos.SignUpDto) (*dtos.UserDto, e
 	}, nil
 }
 
-func (s *DefaultAuthService) UserSignIn(signIn dtos.SignInDto) (*dtos.AccessTokenDto, error) {
+func (s *DefaultAuthService) UserSignIn(signIn dto.SignInDto) (*dto..AccessTokenDto, error) {
 	authRepo := s.repo.UserRepo
 	refreshTokenRepo := s.repo.RefreshTokenRepo
 
@@ -73,7 +73,7 @@ func (s *DefaultAuthService) UserSignIn(signIn dtos.SignInDto) (*dtos.AccessToke
 		return nil, err
 	}
 
-	return &dtos.AccessTokenDto{
+	return &dto..AccessTokenDto{
 		AccessToken:  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODUwNjMyMTYsIm5iZiI6MTU4NTA2MzIxNiwianRpIj",
 		TokenType:    "Bearer",
 		ExpiredAt:    time.Now().Add(time.Minute * 60),

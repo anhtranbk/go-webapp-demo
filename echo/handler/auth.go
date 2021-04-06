@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 	"webapp-demo/core"
-	"webapp-demo/dtos"
+	"webapp-demo/dto"
 	"webapp-demo/service"
 
 	echo "github.com/labstack/echo/v4"
@@ -22,15 +22,15 @@ func NewAuthHandler(appCtx *core.AppContext) *AuthHandler {
 }
 
 func (h AuthHandler) SignUp(c echo.Context) error {
-	var signUp dtos.SignUpDto
+	var signUp dto.SignUpDto
 	if err := c.Bind(&signUp); err != nil {
-		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
+		c.JSON(http.StatusBadRequest, dto.E{Error: err.Error()})
 		return err
 	}
 
 	resp, err := h.Service.UserSignUp(signUp)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
+		c.JSON(http.StatusInternalServerError, dto.E{Error: err.Error()})
 		return err
 	}
 
@@ -39,15 +39,15 @@ func (h AuthHandler) SignUp(c echo.Context) error {
 }
 
 func (h AuthHandler) SignIn(c echo.Context) error {
-	var signIn dtos.SignInDto
+	var signIn dto.SignInDto
 	if err := c.Bind(&signIn); err != nil {
-		c.JSON(http.StatusBadRequest, dtos.E{Error: err.Error()})
+		c.JSON(http.StatusBadRequest, dto.E{Error: err.Error()})
 		return err
 	}
 
 	resp, err := h.Service.UserSignIn(signIn)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, dtos.E{Error: err.Error()})
+		c.JSON(http.StatusInternalServerError, dto.E{Error: err.Error()})
 		return err
 	}
 

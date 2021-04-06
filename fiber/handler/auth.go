@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 	"webapp-demo/core"
-	"webapp-demo/dtos"
+	"webapp-demo/dto"
 	"webapp-demo/service"
 
 	"github.com/gofiber/fiber/v2"
@@ -22,15 +22,15 @@ func NewAuthHandler(appCtx *core.AppContext) *AuthHandler {
 }
 
 func (h AuthHandler) SignUp(c *fiber.Ctx) error {
-	var signUp dtos.SignUpDto
+	var signUp dto.SignUpDto
 	if err := c.BodyParser(&signUp); err != nil {
-		c.Status(http.StatusBadRequest).JSON(dtos.E{Error: err.Error()})
+		c.Status(http.StatusBadRequest).JSON(dto.E{Error: err.Error()})
 		return err
 	}
 
 	resp, err := h.Service.UserSignUp(signUp)
 	if err != nil {
-		c.Status(http.StatusInternalServerError).JSON(dtos.E{Error: err.Error()})
+		c.Status(http.StatusInternalServerError).JSON(dto.E{Error: err.Error()})
 		return err
 	}
 
@@ -39,15 +39,15 @@ func (h AuthHandler) SignUp(c *fiber.Ctx) error {
 }
 
 func (h AuthHandler) SignIn(c *fiber.Ctx) error {
-	var signIn dtos.SignInDto
+	var signIn dto.SignInDto
 	if err := c.BodyParser(&signIn); err != nil {
-		c.Status(http.StatusBadRequest).JSON(dtos.E{Error: err.Error()})
+		c.Status(http.StatusBadRequest).JSON(dto.E{Error: err.Error()})
 		return err
 	}
 
 	resp, err := h.Service.UserSignIn(signIn)
 	if err != nil {
-		c.Status(http.StatusInternalServerError).JSON(dtos.E{Error: err.Error()})
+		c.Status(http.StatusInternalServerError).JSON(dto.E{Error: err.Error()})
 		return err
 	}
 
