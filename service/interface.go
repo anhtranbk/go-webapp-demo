@@ -1,10 +1,8 @@
 package service
 
-import (
-	"webapp-demo/dtos"
-)
+import "webapp-demo/dto"
 
 type AuthService interface {
-	UserSignUp(signUp dtos.SignUpDto) (*dtos.UserDto, error)
-	UserSignIn(signIn dtos.SignInDto) (*dtos.AccessTokenDto, error)
+	UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, error)
+	UserSignIn(signIn dto.SignInDto) (*dto.AccessTokenDto, error)
 }

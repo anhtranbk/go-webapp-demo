@@ -44,7 +44,7 @@ func (s *DefaultAuthService) UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, err
 		return nil, err
 	}
 
-	return &dto..UserDto{
+	return &dto.UserDto{
 		UserId:    user.UserId,
 		UserName:  user.UserName,
 		Email:     user.Email,
@@ -55,7 +55,7 @@ func (s *DefaultAuthService) UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, err
 	}, nil
 }
 
-func (s *DefaultAuthService) UserSignIn(signIn dto.SignInDto) (*dto..AccessTokenDto, error) {
+func (s *DefaultAuthService) UserSignIn(signIn dto.SignInDto) (*dto.AccessTokenDto, error) {
 	authRepo := s.repo.UserRepo
 	refreshTokenRepo := s.repo.RefreshTokenRepo
 
@@ -73,7 +73,7 @@ func (s *DefaultAuthService) UserSignIn(signIn dto.SignInDto) (*dto..AccessToken
 		return nil, err
 	}
 
-	return &dto..AccessTokenDto{
+	return &dto.AccessTokenDto{
 		AccessToken:  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODUwNjMyMTYsIm5iZiI6MTU4NTA2MzIxNiwianRpIj",
 		TokenType:    "Bearer",
 		ExpiredAt:    time.Now().Add(time.Minute * 60),
