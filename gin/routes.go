@@ -10,13 +10,13 @@ import (
 func InitRoutes(engine *gin.Engine, appCtx *core.AppContext) {
 	v1 := engine.Group("/v1")
 
-	initAuthRoutes(v1, appCtx)
+	initAccountRoutes(v1, appCtx)
 }
 
-func initAuthRoutes(router *gin.RouterGroup, appCtx *core.AppContext) {
+func initAccountRoutes(router *gin.RouterGroup, appCtx *core.AppContext) {
 	auth := router.Group("/auth")
 	// handler := &handler.AuthHandler{Service: service.NewMockAuthService()}
-	handler := handler.NewAuthHandler(appCtx)
+	handler := handler.NewAccountHandler(appCtx)
 
 	auth.POST("/signup", handler.SignUp)
 	auth.POST("/signin", handler.SignIn)

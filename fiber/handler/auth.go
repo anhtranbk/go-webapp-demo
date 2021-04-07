@@ -9,19 +9,19 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-type AuthHandler struct {
+type AccountHandler struct {
 	AppContext *core.AppContext
-	Service    service.AuthService
+	Service    service.AccountService
 }
 
-func NewAuthHandler(appCtx *core.AppContext) *AuthHandler {
-	return &AuthHandler{
+func NewAccountHandler(appCtx *core.AppContext) *AccountHandler {
+	return &AccountHandler{
 		AppContext: appCtx,
 		Service:    service.NewAuthService(appCtx),
 	}
 }
 
-func (h AuthHandler) SignUp(c *fiber.Ctx) error {
+func (h AccountHandler) SignUp(c *fiber.Ctx) error {
 	var signUp dto.SignUpDto
 	if err := c.BodyParser(&signUp); err != nil {
 		c.Status(http.StatusBadRequest).JSON(dto.E{Error: err.Error()})
@@ -38,7 +38,7 @@ func (h AuthHandler) SignUp(c *fiber.Ctx) error {
 	return nil
 }
 
-func (h AuthHandler) SignIn(c *fiber.Ctx) error {
+func (h AccountHandler) SignIn(c *fiber.Ctx) error {
 	var signIn dto.SignInDto
 	if err := c.BodyParser(&signIn); err != nil {
 		c.Status(http.StatusBadRequest).JSON(dto.E{Error: err.Error()})

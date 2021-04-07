@@ -10,12 +10,12 @@ import (
 func InitRoutes(e *echo.Echo, appCtx *core.AppContext) {
 	v1 := e.Group("/v1")
 
-	initAuthRoutes(v1, appCtx)
+	initAccountRoutes(v1, appCtx)
 }
 
-func initAuthRoutes(router *echo.Group, appCtx *core.AppContext) {
+func initAccountRoutes(router *echo.Group, appCtx *core.AppContext) {
 	auth := router.Group("/auth")
-	handler := handler.NewAuthHandler(appCtx)
+	handler := handler.NewAccountHandler(appCtx)
 
 	auth.POST("/signup", handler.SignUp)
 	auth.POST("/signin", handler.SignIn)

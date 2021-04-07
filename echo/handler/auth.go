@@ -9,19 +9,19 @@ import (
 	echo "github.com/labstack/echo/v4"
 )
 
-type AuthHandler struct {
+type AccountHandler struct {
 	AppContext *core.AppContext
-	Service    service.AuthService
+	Service    service.AccountService
 }
 
-func NewAuthHandler(appCtx *core.AppContext) *AuthHandler {
-	return &AuthHandler{
+func NewAccountHandler(appCtx *core.AppContext) *AccountHandler {
+	return &AccountHandler{
 		AppContext: appCtx,
 		Service:    service.NewAuthService(appCtx),
 	}
 }
 
-func (h AuthHandler) SignUp(c echo.Context) error {
+func (h AccountHandler) SignUp(c echo.Context) error {
 	var signUp dto.SignUpDto
 	if err := c.Bind(&signUp); err != nil {
 		c.JSON(http.StatusBadRequest, dto.E{Error: err.Error()})
@@ -38,7 +38,7 @@ func (h AuthHandler) SignUp(c echo.Context) error {
 	return nil
 }
 
-func (h AuthHandler) SignIn(c echo.Context) error {
+func (h AccountHandler) SignIn(c echo.Context) error {
 	var signIn dto.SignInDto
 	if err := c.Bind(&signIn); err != nil {
 		c.JSON(http.StatusBadRequest, dto.E{Error: err.Error()})

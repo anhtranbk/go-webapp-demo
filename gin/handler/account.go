@@ -9,19 +9,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type AuthHandler struct {
+type AccountHandler struct {
 	AppContext *core.AppContext
-	Service    service.AuthService
+	Service    service.AccountService
 }
 
-func NewAuthHandler(appCtx *core.AppContext) *AuthHandler {
-	return &AuthHandler{
+func NewAccountHandler(appCtx *core.AppContext) *AccountHandler {
+	return &AccountHandler{
 		AppContext: appCtx,
 		Service:    service.NewAuthService(appCtx),
 	}
 }
 
-func (h AuthHandler) SignUp(ctx *gin.Context) {
+func (h AccountHandler) SignUp(ctx *gin.Context) {
 	var signUp dto.SignUpDto
 	if err := ctx.ShouldBindJSON(&signUp); err != nil {
 		ctx.JSON(http.StatusBadRequest, dto.E{Error: err.Error()})
@@ -37,7 +37,7 @@ func (h AuthHandler) SignUp(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, resp)
 }
 
-func (h AuthHandler) SignIn(ctx *gin.Context) {
+func (h AccountHandler) SignIn(ctx *gin.Context) {
 	var signIn dto.SignInDto
 	if err := ctx.ShouldBindJSON(&signIn); err != nil {
 		ctx.JSON(http.StatusBadRequest, dto.E{Error: err.Error()})
