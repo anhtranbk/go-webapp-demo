@@ -2,7 +2,7 @@ package entity
 
 import "time"
 
-type EntityId uint64
+type ID uint64
 type Gender string
 
 const (
@@ -11,7 +11,7 @@ const (
 )
 
 type User struct {
-	UserId    EntityId
+	UserId    ID
 	UserName  string
 	Password  string
 	Email     string

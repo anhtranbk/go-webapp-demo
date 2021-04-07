@@ -8,17 +8,17 @@ import (
 )
 
 type MockUserRepository struct {
-	users map[entity.EntityId]*entity.User
+	users map[entity.ID]*entity.User
 }
 
 func NewMockUserRepository() *MockUserRepository {
 	return &MockUserRepository{
-		users: make(map[entity.EntityId]*entity.User),
+		users: make(map[entity.ID]*entity.User),
 	}
 }
 
 func (r *MockUserRepository) Create(user *entity.User) (*entity.User, error) {
-	user.UserId = entity.EntityId(rand.Int31n(999999))
+	user.UserId = entity.ID(rand.Int31n(999999))
 	if user.UserName == "" {
 		user.UserName = fmt.Sprintf("user_%d", user.UserId)
 	}
@@ -31,7 +31,7 @@ func (r *MockUserRepository) Update(user *entity.User) error {
 	return nil
 }
 
-func (r *MockUserRepository) Delete(userId entity.EntityId) error {
+func (r *MockUserRepository) Delete(userId entity.ID) error {
 	delete(r.users, userId)
 	return nil
 }
@@ -44,7 +44,7 @@ func (r *MockUserRepository) FindAll(offset int32, limit int32) []*entity.User {
 	return values
 }
 
-func (r *MockUserRepository) FindById(userId entity.EntityId) (*entity.User, error) {
+func (r *MockUserRepository) FindById(userId entity.ID) (*entity.User, error) {
 	return r.users[userId], nil
 }
 

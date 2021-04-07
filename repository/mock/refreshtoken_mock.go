@@ -7,20 +7,20 @@ import (
 )
 
 type MockRefreshTokenRepository struct {
-	tokens map[entity.EntityId]*entity.RefreshToken
+	tokens map[entity.ID]*entity.RefreshToken
 }
 
 func NewMockRefreshTokenRepository() *MockRefreshTokenRepository {
 	return &MockRefreshTokenRepository{
-		tokens: map[entity.EntityId]*entity.RefreshToken{},
+		tokens: map[entity.ID]*entity.RefreshToken{},
 	}
 }
 
 func (r *MockRefreshTokenRepository) Create(token string, expiredAt time.Time,
-	userId entity.EntityId) (*entity.RefreshToken, error) {
+	userId entity.ID) (*entity.RefreshToken, error) {
 
 	tokenObj := &entity.RefreshToken{
-		TokenId:   entity.EntityId(rand.Int31n(999999)),
+		TokenId:   entity.ID(rand.Int31n(999999)),
 		Token:     token,
 		ExpiredAt: expiredAt,
 		IsActive:  true,
@@ -30,7 +30,7 @@ func (r *MockRefreshTokenRepository) Create(token string, expiredAt time.Time,
 }
 
 func (r *MockRefreshTokenRepository) Update(token string, expiredAt time.Time,
-	userId entity.EntityId) (*entity.RefreshToken, error) {
+	userId entity.ID) (*entity.RefreshToken, error) {
 
 	tokenObj := r.tokens[userId]
 	tokenObj.Token = token
@@ -38,7 +38,7 @@ func (r *MockRefreshTokenRepository) Update(token string, expiredAt time.Time,
 	return tokenObj, nil
 }
 
-func (r *MockRefreshTokenRepository) Deactivate(userId entity.EntityId) error {
+func (r *MockRefreshTokenRepository) Deactivate(userId entity.ID) error {
 	r.tokens[userId].IsActive = false
 	return nil
 }
