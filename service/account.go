@@ -8,6 +8,7 @@ import (
 	"webapp-demo/dto"
 	"webapp-demo/entity"
 	"webapp-demo/pkg/errorx"
+	"webapp-demo/pkg/security/password"
 	"webapp-demo/repository"
 )
 
@@ -35,10 +36,16 @@ func (s *DefaultAuthService) UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, err
 		return nil, errorx.EmailExisted
 	}
 
+	pwHelper := password.NewPasswordHelper(s.config)
+	hashedPassword, err := pwHelper.HashPassword(signUp.Password)
+	if err != nil {
+		return nil, err
+	}
+
 	user, err := repo.Create(&entity.User{
 		UserName: signUp.UserName,
 		Email:    signUp.Email,
-		Password: signUp.Password,
+		Password: hashedPassword,
 	})
 	if err != nil {
 		return nil, err
@@ -63,7 +70,9 @@ func (s *DefaultAuthService) UserSignIn(signIn dto.SignInDto) (*dto.AccessTokenD
 	if err != nil {
 		return nil, err
 	}
-	if user == nil || user.Password != signIn.Password {
+
+	pwHelper := password.NewPasswordHelper(s.config)
+	if user == nil || !pwHelper.Matches(signIn.Password, user.Password) {
 		return nil, errorx.InvalidCredentials
 	}
 
