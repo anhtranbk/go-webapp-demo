@@ -9,7 +9,7 @@ import (
 	"webapp-demo/entity"
 	"webapp-demo/pkg/errorx"
 	"webapp-demo/pkg/security/password"
-	"webapp-demo/pkg/util"
+	stringutil "webapp-demo/pkg/util/string"
 	"webapp-demo/repository"
 )
 
@@ -78,7 +78,7 @@ func (s *DefaultAuthService) UserSignIn(signIn dto.SignInDto) (*dto.AccessTokenD
 	}
 
 	expiredAt := time.Now().Add(15 * 24 * time.Hour)
-	randomToken := util.RandStringSeq(16)
+	randomToken := stringutil.RandStringSeq(16)
 	refreshToken, err := refreshTokenRepo.Create(randomToken, expiredAt, user.UserId)
 	if err != nil {
 		return nil, err
