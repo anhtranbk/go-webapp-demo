@@ -17,7 +17,7 @@ type AccountHandler struct {
 func NewAccountHandler(appCtx *core.AppContext) *AccountHandler {
 	return &AccountHandler{
 		AppContext: appCtx,
-		Service:    service.NewAuthService(appCtx),
+		Service:    service.NewAccountService(appCtx),
 	}
 }
 

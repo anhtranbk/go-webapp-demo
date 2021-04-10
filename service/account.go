@@ -13,21 +13,21 @@ import (
 	"webapp-demo/repository"
 )
 
-type DefaultAuthService struct {
+type DefaultAccountService struct {
 	config  *config.Config
 	context context.Context
 	repo    repository.Repositories
 }
 
-func NewAuthService(appCtx *core.AppContext) *DefaultAuthService {
-	return &DefaultAuthService{
+func NewAccountService(appCtx *core.AppContext) *DefaultAccountService {
+	return &DefaultAccountService{
 		config:  appCtx.Config,
 		context: appCtx.Context,
 		repo:    *appCtx.Repo,
 	}
 }
 
-func (s *DefaultAuthService) UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, error) {
+func (s *DefaultAccountService) UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, error) {
 	repo := s.repo.UserRepo
 	exist, err := repo.IsExist(signUp.Email)
 	if err != nil {
@@ -63,7 +63,7 @@ func (s *DefaultAuthService) UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, err
 	}, nil
 }
 
-func (s *DefaultAuthService) UserSignIn(signIn dto.SignInDto) (*dto.AccessTokenDto, error) {
+func (s *DefaultAccountService) UserSignIn(signIn dto.SignInDto) (*dto.AccessTokenDto, error) {
 	authRepo := s.repo.UserRepo
 	refreshTokenRepo := s.repo.RefreshTokenRepo
 

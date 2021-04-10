@@ -6,14 +6,14 @@ import (
 	"webapp-demo/entity"
 )
 
-type MockAuthService struct {
+type MockAccountService struct {
 }
 
-func NewMockAuthService() *MockAuthService {
-	return &MockAuthService{}
+func NewMockAuthService() *MockAccountService {
+	return &MockAccountService{}
 }
 
-func (s *MockAuthService) UserSignUp(userReg dto.SignUpDto) (*dto.UserDto, error) {
+func (s *MockAccountService) UserSignUp(userReg dto.SignUpDto) (*dto.UserDto, error) {
 	return &dto.UserDto{
 		UserId:    184615,
 		UserName:  "tjeubaoit",
@@ -25,7 +25,7 @@ func (s *MockAuthService) UserSignUp(userReg dto.SignUpDto) (*dto.UserDto, error
 	}, nil
 }
 
-func (s *MockAuthService) UserSignIn(userLogin dto.SignInDto) (*dto.AccessTokenDto, error) {
+func (s *MockAccountService) UserSignIn(userLogin dto.SignInDto) (*dto.AccessTokenDto, error) {
 	return &dto.AccessTokenDto{
 		AccessToken:  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODUwNjMyMTYsIm5iZiI6MTU4NTA2MzIxNiwianRpIj",
 		TokenType:    "Bearer",
