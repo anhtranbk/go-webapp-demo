@@ -3,9 +3,9 @@ package stringutil
 import "math/rand"
 
 const (
-	AsciiUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	AsciiLowercase = "abcdefghijklmnopqrstuvwxyz"
-	AsciiLetters   = AsciiLowercase + AsciiUppercase
+	AsciiUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	AsciiLowerCase = "abcdefghijklmnopqrstuvwxyz"
+	AsciiLetters   = AsciiLowerCase + AsciiUpperCase
 	Digits         = "1234567890"
 )
 
