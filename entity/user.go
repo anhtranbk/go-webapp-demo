@@ -2,7 +2,7 @@ package entity
 
 import "time"
 
-type ID uint64
+type ID int64
 type Gender string
 
 const (
