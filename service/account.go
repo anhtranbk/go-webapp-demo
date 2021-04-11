@@ -8,7 +8,9 @@ import (
 	"webapp-demo/dto"
 	"webapp-demo/entity"
 	"webapp-demo/pkg/errorx"
+	"webapp-demo/pkg/security/accesstoken"
 	"webapp-demo/pkg/security/password"
+	"webapp-demo/pkg/types"
 	stringutil "webapp-demo/pkg/util/string"
 	"webapp-demo/repository"
 )
@@ -78,14 +80,22 @@ func (s *DefaultAccountService) UserSignIn(signIn dto.SignInDto) (*dto.AccessTok
 	}
 
 	expiredAt := time.Now().Add(15 * 24 * time.Hour)
-	randomToken := stringutil.RandStringSeq(16)
-	refreshToken, err := refreshTokenRepo.Create(randomToken, expiredAt, user.UserId)
+	tokenStr := stringutil.RandStringSeq(16)
+	refreshToken, err := refreshTokenRepo.Create(tokenStr, expiredAt, user.UserId)
+	if err != nil {
+		return nil, err
+	}
+
+	// generate an accesstoken expires in one hour
+	accessToken, err := accesstoken.GenerateAccessToken(user.UserId, time.Hour,
+		s.config.SecretKey, types.GenericMap{"email": user.Email})
+
 	if err != nil {
 		return nil, err
 	}
 
 	return &dto.AccessTokenDto{
-		AccessToken:  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODUwNjMyMTYsIm5iZiI6MTU4NTA2MzIxNiwianRpIj",
+		AccessToken:  accessToken,
 		TokenType:    "Bearer",
 		ExpiredAt:    time.Now().Add(time.Minute * 60),
 		RefreshToken: refreshToken.Token,
