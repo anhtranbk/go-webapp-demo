@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"regexp"
 	"time"
 	"webapp-demo/config"
 	"webapp-demo/core"
@@ -29,7 +30,25 @@ func NewAccountService(appCtx *core.AppContext) *DefaultAccountService {
 	}
 }
 
+var emailRegex = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+
+func isEmailValid(e string) bool {
+	if len(e) < 3 && len(e) > 254 {
+		return false
+	}
+	return emailRegex.MatchString(e)
+}
+
 func (s *DefaultAccountService) UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, error) {
+	// validate input
+	pwLen := len(signUp.Password)
+	if pwLen < 6 || pwLen > 32 {
+		return nil, errorx.MalformedPassword
+	}
+	if !isEmailValid(signUp.Email) {
+		return nil, errorx.MalformedEmail
+	}
+
 	repo := s.repo.UserRepo
 	exist, err := repo.IsExist(signUp.Email)
 	if err != nil {
