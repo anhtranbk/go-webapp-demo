@@ -97,7 +97,7 @@ func (s *DefaultAccountService) UserSignIn(signIn dto.SignInDto) (*dto.AccessTok
 	}
 
 	// generate an accesstoken expires in one hour
-	accessToken, err := accesstoken.GenerateAccessToken(user.UserId, time.Hour,
+	accessToken, err := accesstoken.GenerateToken(user.UserId, time.Hour,
 		s.config.SecretKey, types.GenericMap{"email": user.Email})
 
 	if err != nil {

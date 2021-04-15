@@ -12,7 +12,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func GenerateAccessToken(userId entity.ID, expireIn time.Duration,
+func GenerateToken(userId entity.ID, expireIn time.Duration,
 	secret string, customClaims types.GenericMap) (string, error) {
 
 	claims := jwt.MapClaims{
