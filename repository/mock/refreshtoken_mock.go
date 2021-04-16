@@ -6,17 +6,17 @@ import (
 	"webapp-demo/entity"
 )
 
-type MockRefreshTokenRepository struct {
+type RefreshTokenRepo struct {
 	tokens map[entity.ID]*entity.RefreshToken
 }
 
-func NewMockRefreshTokenRepository() *MockRefreshTokenRepository {
-	return &MockRefreshTokenRepository{
+func NewRefreshTokenRepo() *RefreshTokenRepo {
+	return &RefreshTokenRepo{
 		tokens: map[entity.ID]*entity.RefreshToken{},
 	}
 }
 
-func (r *MockRefreshTokenRepository) Create(token string, expiredAt time.Time,
+func (r *RefreshTokenRepo) Create(token string, expiredAt time.Time,
 	userId entity.ID) (*entity.RefreshToken, error) {
 
 	tokenObj := &entity.RefreshToken{
@@ -29,7 +29,7 @@ func (r *MockRefreshTokenRepository) Create(token string, expiredAt time.Time,
 	return tokenObj, nil
 }
 
-func (r *MockRefreshTokenRepository) Update(token string, expiredAt time.Time,
+func (r *RefreshTokenRepo) Update(token string, expiredAt time.Time,
 	userId entity.ID) (*entity.RefreshToken, error) {
 
 	tokenObj := r.tokens[userId]
@@ -38,7 +38,7 @@ func (r *MockRefreshTokenRepository) Update(token string, expiredAt time.Time,
 	return tokenObj, nil
 }
 
-func (r *MockRefreshTokenRepository) Deactivate(userId entity.ID) error {
+func (r *RefreshTokenRepo) Deactivate(userId entity.ID) error {
 	r.tokens[userId].IsActive = false
 	return nil
 }

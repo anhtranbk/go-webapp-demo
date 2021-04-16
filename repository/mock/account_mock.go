@@ -7,17 +7,17 @@ import (
 	"webapp-demo/entity"
 )
 
-type MockUserRepository struct {
+type MockUserRepo struct {
 	users map[entity.ID]*entity.User
 }
 
-func NewMockUserRepository() *MockUserRepository {
-	return &MockUserRepository{
+func NewUserRepo() *MockUserRepo {
+	return &MockUserRepo{
 		users: make(map[entity.ID]*entity.User),
 	}
 }
 
-func (r *MockUserRepository) Create(user *entity.User) (*entity.User, error) {
+func (r *MockUserRepo) Create(user *entity.User) (*entity.User, error) {
 	user.UserId = entity.ID(rand.Int31n(999999))
 	if user.UserName == "" {
 		user.UserName = fmt.Sprintf("user_%d", user.UserId)
@@ -26,17 +26,17 @@ func (r *MockUserRepository) Create(user *entity.User) (*entity.User, error) {
 	return user, nil
 }
 
-func (r *MockUserRepository) Update(user *entity.User) error {
+func (r *MockUserRepo) Update(user *entity.User) error {
 	r.users[user.UserId] = user
 	return nil
 }
 
-func (r *MockUserRepository) Delete(userId entity.ID) error {
+func (r *MockUserRepo) Delete(userId entity.ID) error {
 	delete(r.users, userId)
 	return nil
 }
 
-func (r *MockUserRepository) FindAll(offset int32, limit int32) []*entity.User {
+func (r *MockUserRepo) FindAll(offset int32, limit int32) []*entity.User {
 	values := make([]*entity.User, 0, len(r.users))
 	for _, val := range r.users {
 		values = append(values, val)
@@ -44,11 +44,11 @@ func (r *MockUserRepository) FindAll(offset int32, limit int32) []*entity.User {
 	return values
 }
 
-func (r *MockUserRepository) FindById(userId entity.ID) (*entity.User, error) {
+func (r *MockUserRepo) FindById(userId entity.ID) (*entity.User, error) {
 	return r.users[userId], nil
 }
 
-func (r *MockUserRepository) FindByEmail(email string) (*entity.User, error) {
+func (r *MockUserRepo) FindByEmail(email string) (*entity.User, error) {
 	for _, val := range r.users {
 		if val.Email == email {
 			return val, nil
@@ -57,7 +57,7 @@ func (r *MockUserRepository) FindByEmail(email string) (*entity.User, error) {
 	return nil, errors.New("Not found")
 }
 
-func (r *MockUserRepository) IsExist(email string) (bool, error) {
+func (r *MockUserRepo) IsExist(email string) (bool, error) {
 	for _, val := range r.users {
 		if val.Email == email {
 			return true, nil

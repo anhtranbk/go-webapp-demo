@@ -4,7 +4,7 @@ import "webapp-demo/repository/mock"
 
 func NewMockRepositories() *Repositories {
 	return &Repositories{
-		UserRepo:         mock.NewMockUserRepository(),
-		RefreshTokenRepo: mock.NewMockRefreshTokenRepository(),
+		UserRepo:         mock.NewUserRepo(),
+		RefreshTokenRepo: mock.NewRefreshTokenRepo(),
 	}
 }

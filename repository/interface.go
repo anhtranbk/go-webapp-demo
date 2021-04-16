@@ -5,7 +5,7 @@ import (
 	"webapp-demo/entity"
 )
 
-type UserRepository interface {
+type UserRepo interface {
 	Create(user *entity.User) (*entity.User, error)
 	Update(user *entity.User) error
 	Delete(userId entity.ID) error
@@ -16,13 +16,13 @@ type UserRepository interface {
 	IsExist(email string) (bool, error)
 }
 
-type RefreshTokenRepository interface {
+type RefreshTokenRepo interface {
 	Create(token string, expiredAt time.Time, userId entity.ID) (*entity.RefreshToken, error)
 	Update(token string, expiredAt time.Time, userId entity.ID) (*entity.RefreshToken, error)
 	Deactivate(userId entity.ID) error
 }
 
 type Repositories struct {
-	UserRepo         UserRepository
-	RefreshTokenRepo RefreshTokenRepository
+	UserRepo         UserRepo
+	RefreshTokenRepo RefreshTokenRepo
 }
