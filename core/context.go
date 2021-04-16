@@ -2,8 +2,8 @@ package core
 
 import (
 	"context"
+	"webapp-demo/app/repository"
 	"webapp-demo/config"
-	"webapp-demo/repository"
 )
 
 type AppContext struct {

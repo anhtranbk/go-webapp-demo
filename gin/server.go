@@ -2,9 +2,9 @@ package gin
 
 import (
 	"context"
+	"webapp-demo/app/repository"
 	"webapp-demo/config"
 	"webapp-demo/core"
-	"webapp-demo/repository"
 
 	"github.com/gin-gonic/gin"
 )

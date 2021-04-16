@@ -2,7 +2,7 @@ package dto
 
 import (
 	"time"
-	"webapp-demo/entity"
+	"webapp-demo/app/entity"
 )
 
 type UserDto struct {

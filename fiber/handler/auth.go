@@ -2,9 +2,9 @@ package handler
 
 import (
 	"net/http"
+	"webapp-demo/app/dto"
+	"webapp-demo/app/service"
 	"webapp-demo/core"
-	"webapp-demo/dto"
-	"webapp-demo/service"
 
 	"github.com/gofiber/fiber/v2"
 )

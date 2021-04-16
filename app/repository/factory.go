@@ -1,6 +1,6 @@
 package repository
 
-import "webapp-demo/repository/mock"
+import "webapp-demo/app/repository/mock"
 
 func NewMockRepositories() *Repositories {
 	return &Repositories{

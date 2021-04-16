@@ -3,7 +3,7 @@ package mock
 import (
 	"math/rand"
 	"time"
-	"webapp-demo/entity"
+	"webapp-demo/app/entity"
 )
 
 type RefreshTokenRepo struct {

@@ -2,7 +2,7 @@ package repository
 
 import (
 	"time"
-	"webapp-demo/entity"
+	"webapp-demo/app/entity"
 )
 
 type UserRepo interface {

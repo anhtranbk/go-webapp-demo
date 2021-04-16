@@ -3,9 +3,9 @@ package fiber
 import (
 	"context"
 	"log"
+	"webapp-demo/app/repository"
 	"webapp-demo/config"
 	"webapp-demo/core"
-	"webapp-demo/repository"
 
 	"github.com/gofiber/fiber/v2"
 )

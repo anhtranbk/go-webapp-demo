@@ -1,6 +1,6 @@
 package service
 
-import "webapp-demo/dto"
+import "webapp-demo/app/dto"
 
 type AccountService interface {
 	UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, error)

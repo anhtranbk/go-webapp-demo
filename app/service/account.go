@@ -3,17 +3,17 @@ package service
 import (
 	"context"
 	"time"
+	"webapp-demo/app/dto"
+	"webapp-demo/app/entity"
+	"webapp-demo/app/repository"
 	"webapp-demo/config"
 	"webapp-demo/core"
-	"webapp-demo/dto"
-	"webapp-demo/entity"
 	"webapp-demo/pkg/errorx"
 	"webapp-demo/pkg/security/accesstoken"
 	"webapp-demo/pkg/security/password"
 	"webapp-demo/pkg/types"
 	stringutil "webapp-demo/pkg/util/string"
 	"webapp-demo/pkg/validation"
-	"webapp-demo/repository"
 )
 
 type DefaultAccountService struct {
@@ -76,10 +76,10 @@ func (s *DefaultAccountService) UserSignUp(signUp dto.SignUpDto) (*dto.UserDto, 
 }
 
 func (s *DefaultAccountService) UserSignIn(signIn dto.SignInDto) (*dto.AccessTokenDto, error) {
-	authRepo := s.repo.UserRepo
+	userRepo := s.repo.UserRepo
 	refreshTokenRepo := s.repo.RefreshTokenRepo
 
-	user, err := authRepo.FindByEmail(signIn.Email)
+	user, err := userRepo.FindByEmail(signIn.Email)
 	if err != nil {
 		return nil, err
 	}
