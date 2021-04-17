@@ -7,7 +7,6 @@ import (
 	"webapp-demo/app/user/dto"
 	"webapp-demo/app/user/entity"
 	"webapp-demo/config"
-	"webapp-demo/core"
 	"webapp-demo/pkg/errorx"
 	"webapp-demo/pkg/security/accesstoken"
 	"webapp-demo/pkg/security/password"
@@ -22,7 +21,7 @@ type DefaultAccountService struct {
 	repo    app.Repositories
 }
 
-func NewAccountService(appCtx *core.AppContext) *DefaultAccountService {
+func NewAccountService(appCtx *app.AppContext) *DefaultAccountService {
 	return &DefaultAccountService{
 		config:  appCtx.Config,
 		context: appCtx.Context,

@@ -1,19 +1,19 @@
 package gin
 
 import (
-	"webapp-demo/core"
+	"webapp-demo/app"
 	"webapp-demo/gin/handler"
 
 	"github.com/gin-gonic/gin"
 )
 
-func InitRoutes(engine *gin.Engine, appCtx *core.AppContext) {
+func InitRoutes(engine *gin.Engine, appCtx *app.AppContext) {
 	v1 := engine.Group("/v1")
 
 	initAccountRoutes(v1, appCtx)
 }
 
-func initAccountRoutes(router *gin.RouterGroup, appCtx *core.AppContext) {
+func initAccountRoutes(router *gin.RouterGroup, appCtx *app.AppContext) {
 	auth := router.Group("/auth")
 	// handler := &handler.AuthHandler{Service: service.NewMockAuthService()}
 	handler := handler.NewAccountHandler(appCtx)

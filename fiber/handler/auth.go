@@ -2,19 +2,19 @@ package handler
 
 import (
 	"net/http"
+	"webapp-demo/app"
 	"webapp-demo/app/user/dto"
 	"webapp-demo/app/user/service"
-	"webapp-demo/core"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 type AccountHandler struct {
-	AppContext *core.AppContext
+	AppContext *app.AppContext
 	Service    service.AccountService
 }
 
-func NewAccountHandler(appCtx *core.AppContext) *AccountHandler {
+func NewAccountHandler(appCtx *app.AppContext) *AccountHandler {
 	return &AccountHandler{
 		AppContext: appCtx,
 		Service:    service.NewAccountService(appCtx),

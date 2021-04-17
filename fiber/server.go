@@ -5,7 +5,6 @@ import (
 	"log"
 	"webapp-demo/app"
 	"webapp-demo/config"
-	"webapp-demo/core"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -13,7 +12,7 @@ import (
 func StartServer() {
 	f := fiber.New()
 
-	appCtx := core.AppContext{
+	appCtx := app.AppContext{
 		Context: context.TODO(),
 		Config:  &config.Config{},
 		Repo:    app.NewMockRepositories(),
