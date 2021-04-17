@@ -2,8 +2,8 @@ package handler
 
 import (
 	"net/http"
-	"webapp-demo/app/dto"
-	"webapp-demo/app/service"
+	"webapp-demo/app/user/dto"
+	"webapp-demo/app/user/service"
 	"webapp-demo/core"
 
 	"github.com/gin-gonic/gin"

@@ -3,7 +3,7 @@ package accesstoken
 import (
 	"strconv"
 	"time"
-	"webapp-demo/app/entity"
+	"webapp-demo/app/user/entity"
 	"webapp-demo/pkg/types"
 	jwtutil "webapp-demo/pkg/util/jwt"
 	maputil "webapp-demo/pkg/util/map"

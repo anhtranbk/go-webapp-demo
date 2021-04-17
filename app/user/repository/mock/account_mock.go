@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
-	"webapp-demo/app/entity"
+	"webapp-demo/app/user/entity"
 )
 
 type MockUserRepo struct {

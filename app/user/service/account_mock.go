@@ -2,8 +2,8 @@ package service
 
 import (
 	"time"
-	"webapp-demo/app/dto"
-	"webapp-demo/app/entity"
+	"webapp-demo/app/user/dto"
+	"webapp-demo/app/user/entity"
 )
 
 type MockAccountService struct {

@@ -2,7 +2,7 @@ package repository
 
 import (
 	"time"
-	"webapp-demo/app/entity"
+	"webapp-demo/app/user/entity"
 )
 
 type UserRepo interface {
@@ -20,9 +20,4 @@ type RefreshTokenRepo interface {
 	Create(token string, expiredAt time.Time, userId entity.ID) (*entity.RefreshToken, error)
 	Update(token string, expiredAt time.Time, userId entity.ID) (*entity.RefreshToken, error)
 	Deactivate(userId entity.ID) error
-}
-
-type Repositories struct {
-	UserRepo         UserRepo
-	RefreshTokenRepo RefreshTokenRepo
 }

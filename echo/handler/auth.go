@@ -2,8 +2,8 @@ package handler
 
 import (
 	"net/http"
-	"webapp-demo/app/dto"
-	"webapp-demo/app/service"
+	"webapp-demo/app/user/dto"
+	"webapp-demo/app/user/service"
 	"webapp-demo/core"
 
 	echo "github.com/labstack/echo/v4"

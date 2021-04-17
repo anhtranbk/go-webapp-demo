@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 	"time"
-	"webapp-demo/app/dto"
-	"webapp-demo/app/entity"
-	"webapp-demo/app/repository"
+	"webapp-demo/app"
+	"webapp-demo/app/user/dto"
+	"webapp-demo/app/user/entity"
 	"webapp-demo/config"
 	"webapp-demo/core"
 	"webapp-demo/pkg/errorx"
@@ -19,7 +19,7 @@ import (
 type DefaultAccountService struct {
 	config  *config.Config
 	context context.Context
-	repo    repository.Repositories
+	repo    app.Repositories
 }
 
 func NewAccountService(appCtx *core.AppContext) *DefaultAccountService {

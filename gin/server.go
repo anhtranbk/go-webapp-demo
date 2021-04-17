@@ -2,7 +2,7 @@ package gin
 
 import (
 	"context"
-	"webapp-demo/app/repository"
+	"webapp-demo/app"
 	"webapp-demo/config"
 	"webapp-demo/core"
 
@@ -10,15 +10,15 @@ import (
 )
 
 func StartServer() {
-	app := gin.Default()
+	g := gin.Default()
 
 	appCtx := core.AppContext{
 		Context: context.TODO(),
 		Config:  &config.Config{},
-		Repo:    repository.NewMockRepositories(),
+		Repo:    app.NewMockRepositories(),
 	}
 
-	InitRoutes(app, &appCtx)
+	InitRoutes(g, &appCtx)
 
-	app.Run(":8080")
+	g.Run(":8080")
 }

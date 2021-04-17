@@ -2,7 +2,7 @@ package echo
 
 import (
 	"context"
-	"webapp-demo/app/repository"
+	"webapp-demo/app"
 	"webapp-demo/config"
 	"webapp-demo/core"
 
@@ -20,7 +20,7 @@ func StartServer() {
 	appCtx := core.AppContext{
 		Context: context.TODO(),
 		Config:  &config.Config{},
-		Repo:    repository.NewMockRepositories(),
+		Repo:    app.NewMockRepositories(),
 	}
 
 	InitRoutes(e, &appCtx)

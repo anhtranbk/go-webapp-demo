@@ -3,7 +3,7 @@ package fiber
 import (
 	"context"
 	"log"
-	"webapp-demo/app/repository"
+	"webapp-demo/app"
 	"webapp-demo/config"
 	"webapp-demo/core"
 
@@ -11,15 +11,15 @@ import (
 )
 
 func StartServer() {
-	app := fiber.New()
+	f := fiber.New()
 
 	appCtx := core.AppContext{
 		Context: context.TODO(),
 		Config:  &config.Config{},
-		Repo:    repository.NewMockRepositories(),
+		Repo:    app.NewMockRepositories(),
 	}
 
-	InitRoutes(app, &appCtx)
+	InitRoutes(f, &appCtx)
 
-	log.Fatal(app.Listen(":8080"))
+	log.Fatal(f.Listen(":8080"))
 }
